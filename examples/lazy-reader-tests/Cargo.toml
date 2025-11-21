@@ -1,6 +1,6 @@
 [package]
 name = "lazy-reader-tests"
-version = "0.9.1"
+version = "0.9.2"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -11,5 +11,5 @@ lazy_static = "1.4.0"
 rand = "0.8.5"
 
 [build-dependencies]
-codegen = { package ="molecule-codegen", path = "../../tools/codegen" }
+codegen = { package = "molecule-codegen", path = "../../tools/codegen" }
 cc = "1.0.66"

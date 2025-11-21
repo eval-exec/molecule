@@ -1,11 +1,11 @@
 [package]
 name = "molecule-tests-loader"
-version = "0.9.1"
+version = "0.9.2"
 authors = ["Nervos Core Dev <dev@nervos.org>"]
 edition = "2018"
 
 [dependencies]
-codegen = { package ="molecule-codegen", path = "../../tools/codegen" }
+codegen = { package = "molecule-codegen", path = "../../tools/codegen" }
 syn = "1.0.58"
 quote = "1.0.8"
 proc-macro2 = "1.0.24"

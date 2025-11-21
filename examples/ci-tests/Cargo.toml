@@ -1,6 +1,6 @@
 [package]
 name = "molecule-ci-tests"
-version = "0.9.1"
+version = "0.9.2"
 authors = ["Nervos Core Dev <dev@nervos.org>"]
 edition = "2018"
 
@@ -12,7 +12,7 @@ path = "src/simple-example.rs"
 molecule = { path = "../../bindings/rust", default-features = false }
 
 [build-dependencies]
-codegen = { package ="molecule-codegen", path = "../../tools/codegen" }
+codegen = { package = "molecule-codegen", path = "../../tools/codegen" }
 cc = "1.0.83"
 
 [dev-dependencies]
