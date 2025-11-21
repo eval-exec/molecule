@@ -271,39 +271,25 @@ impl ImplBuilder for ast::DynVec {
 
 fn gen_from_iter(name: &str, item_name: &str) -> m4::TokenStream {
     let entity = entity_name(name);
-    let maybe_byte_vec = if item_name == "byte" {
-        quote!(
-            impl ::core::iter::FromIterator<u8> for #entity {
-                fn from_iter<T: IntoIterator<Item = u8>>(iter: T) -> Self {
-                    Self::new_builder().extend(iter.into_iter().map(Into::into)).build()
-                }
-            }
-
-            impl From<Vec<u8>> for #entity {
-                fn from(v: Vec<u8>) -> Self {
-                    Self::new_builder().set(v.into_iter().map(Into::into).collect()).build()
-                }
-            }
-        )
-    } else {
-        quote!()
-    };
     let item_name = entity_name(item_name);
     quote!(
-        impl ::core::iter::FromIterator<#item_name> for #entity {
-            fn from_iter<T: IntoIterator<Item = #item_name>>(iter: T) -> Self {
-                Self::new_builder().extend(iter).build()
-            }
-        }
-
-        impl From<Vec<#item_name>> for #entity
+        impl<T> ::core::iter::FromIterator<T> for #entity
+        where
+            T: Into<#item_name>,
         {
-            fn from(v: Vec<#item_name>) -> Self {
-                Self::new_builder().set(v).build()
+            fn from_iter<I: IntoIterator<Item = T>>(iter: I) -> Self {
+                Self::new_builder().extend(iter.into_iter().map(Into::into)).build()
             }
         }
 
-        #maybe_byte_vec
+        impl<T> From<Vec<T>> for #entity
+        where
+            T: Into<#item_name>
+        {
+            fn from(v: Vec<T>) -> Self {
+                v.into_iter().collect()
+            }
+        }
     )
 }
 
