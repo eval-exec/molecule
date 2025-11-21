@@ -79,9 +79,5 @@ impl fmt::Display for Error {
     }
 }
 
-cfg_if::cfg_if! {
-    if #[cfg(feature = "std")] {
-        impl ::std::error::Error for VerificationError {}
-        impl ::std::error::Error for Error {}
-    }
-}
+impl core::error::Error for VerificationError {}
+impl core::error::Error for Error {}
